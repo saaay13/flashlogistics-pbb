@@ -77,7 +77,7 @@
 
 ## Leyenda
 
-- `-->` : Asociación (actor iniciador)
+- `--` : Asociación (actor iniciador)
 - `..>` : Relación entre casos de uso
 - `<<include>>` : El caso base siempre incluye al otro
 - `<<extend>>` : El caso extendido es opcional
