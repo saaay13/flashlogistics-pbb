@@ -299,7 +299,7 @@ deactivate Interfaz
 
 ```plantuml
 @startuml
-actor Gerente
+actor Despachador
 boundary Interfaz
 control Controlador
 participant GPS
@@ -327,7 +327,7 @@ loop por cada pedido activo
 
     Controlador --> Interfaz : Generar alerta
     activate Interfaz
-    Interfaz --> Gerente : Notificar retraso
+    Interfaz --> Despachador : Notificar retraso
     deactivate Interfaz
   else
     Controlador -> Controlador : Continuar monitoreo
