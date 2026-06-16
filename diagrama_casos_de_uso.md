@@ -3,12 +3,12 @@
 ## Actor: Gerente
 
 ```
-[Gerente] --> (Optimizar rutas)
-[Gerente] --> (Ver costo estimado de ruta)
-[Gerente] --> (Ver KPIs en dashboard)
-[Gerente] --> (Generar reportes semanales)
-[Gerente] --> (Ver ubicación de camiones)
-[Gerente] --> (Recibir alerta de pedido retrasado)
+[Gerente] -- (Optimizar rutas)
+[Gerente] -- (Ver costo estimado de ruta)
+[Gerente] -- (Ver KPIs en dashboard)
+[Gerente] -- (Generar reportes semanales)
+[Gerente] -- (Ver ubicación de camiones)
+[Gerente] -- (Recibir alerta de pedido retrasado)
 
 (Optimizar rutas) ..> (Consultar datos de mapas) : <<include>>
 (Ver costo estimado de ruta) ..> (Optimizar rutas) : <<extend>>
@@ -17,34 +17,34 @@
 (Recibir alerta de pedido retrasado) ..> (Ver ubicación de camiones) : <<extend>>
 (Recibir alerta de pedido retrasado) ..> (Enviar notificación) : <<include>>
 
-[API de Mapas] --> (Consultar datos de mapas)
-[Sistema GPS] --> (Obtener coordenadas GPS)
-[Servicio de Notificaciones] --> (Enviar notificación)
+[API de Mapas] -- (Consultar datos de mapas)
+[Sistema GPS] -- (Obtener coordenadas GPS)
+[Servicio de Notificaciones] -- (Enviar notificación)
 ```
 
 ## Actor: Despachador
 
 ```
-[Despachador] --> (Registrar pedidos)
-[Despachador] --> (Ver ubicación de camiones)
+[Despachador] -- (Registrar pedidos)
+[Despachador] -- (Ver ubicación de camiones)
 
 (Ver ubicación de camiones) ..> (Obtener coordenadas GPS) : <<include>>
 
-[Sistema GPS] --> (Obtener coordenadas GPS)
+[Sistema GPS] -- (Obtener coordenadas GPS)
 ```
 
 ## Actor: Administrador
 
 ```
-[Administrador] --> (Registrar conductores)
-[Administrador] --> (Registrar vehículos)
+[Administrador] -- (Registrar conductores)
+[Administrador] -- (Registrar vehículos)
 ```
 
 ## Actor: Conductor
 
 ```
-[Conductor] --> (Ver ruta asignada)
-[Conductor] --> (Marcar pedido como entregado)
+[Conductor] -- (Ver ruta asignada)
+[Conductor] -- (Marcar pedido como entregado)
 
 (Marcar pedido como entregado) ..> (Ver ruta asignada) : <<extend>>
 ```
@@ -52,13 +52,13 @@
 ## Actor: Cliente
 
 ```
-[Cliente] --> (Rastrear pedido en vivo)
-[Cliente] --> (Recibir notificación de pedido cercano)
+[Cliente] -- (Rastrear pedido en vivo)
+[Cliente] -- (Recibir notificación de pedido cercano)
 
 (Rastrear pedido en vivo) ..> (Obtener coordenadas GPS) : <<include>>
 (Recibir notificación de pedido cercano) ..> (Enviar notificación) : <<include>>
 
-[Sistema GPS] --> (Obtener coordenadas GPS)
+[Sistema GPS] -- (Obtener coordenadas GPS)
 [Servicio de Notificaciones] --> (Enviar notificación)
 ```
 
