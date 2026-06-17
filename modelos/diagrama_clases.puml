@@ -117,19 +117,19 @@ Persona <|-- Cliente
 Persona <|-- Conductor
 
 Persona "1" -- "1" Usuario : posee
-Usuario "*" -- "*" Rol : tiene
+Usuario "N" -- "1" Rol : tiene
 
-Cliente "1" -- "0..*" Pedido : realiza
-Conductor "1" -- "0..*" Ruta : asigna
+Cliente "1" -- "N" Pedido : realiza
+Conductor "1" -- "N" Ruta : asigna
 
 Conductor "1" o-- "1" Vehiculo : conduce
 
 Pedido "1" *-- "1" Ruta : genera
-Pedido "1" *-- "0..1" Entrega : genera
-Vehiculo "1" *-- "0..*" ConsumoCombustible : registra
-Ruta "1" *-- "0..*" UbicacionGPS : monitorea
-Ruta "1" *-- "0..*" Notificacion : genera
+Pedido "1" *-- "N" Entrega : genera
+Vehiculo "1" *-- "N" ConsumoCombustible : registra
+Ruta "1" *-- "N" UbicacionGPS : monitorea
+Ruta "1" *-- "N" Notificacion : genera
 
-Reporte ..> Pedido : basado_en
-Reporte ..> Entrega : basado_en
-Reporte ..> ConsumoCombustible : basado_en
+Reporte .. Pedido : basado_en
+Reporte .. Entrega : basado_en
+Reporte .. ConsumoCombustible : basado_en
