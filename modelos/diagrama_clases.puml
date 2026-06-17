@@ -1,5 +1,4 @@
-﻿@startuml
-%%{init: {'flowchart': {'curve': 'linear'}}}%%
+﻿%%{init: {'flowchart': {'curve': 'linear'}}}%%
 classDiagram
 
 class Persona {
@@ -138,5 +137,3 @@ Ruta "1" *-- "0..*" Notificacion : genera
 Reporte ..-- Pedido : basado_en
 Reporte ..-- Entrega : basado_en
 Reporte ..-- ConsumoCombustible : basado_en
-
-@enduml
