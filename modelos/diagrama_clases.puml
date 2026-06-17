@@ -113,27 +113,23 @@ class Reporte {
     +generar_pdf()
 }
 
-' Herencia
 Persona <|-- Cliente
 Persona <|-- Conductor
 
-' Asociaciones
 Persona "1" -- "1" Usuario : posee
 Usuario "*" -- "*" Rol : tiene
+
 Cliente "1" -- "0..*" Pedido : realiza
 Conductor "1" -- "0..*" Ruta : asigna
 
-' Agregacion (vehiculo existe independientemente del conductor)
 Conductor "1" o-- "1" Vehiculo : conduce
 
-' Composiciones (clase hija depende del ciclo de vida del padre)
 Pedido "1" *-- "1" Ruta : genera
 Pedido "1" *-- "0..1" Entrega : genera
 Vehiculo "1" *-- "0..*" ConsumoCombustible : registra
 Ruta "1" *-- "0..*" UbicacionGPS : monitorea
 Ruta "1" *-- "0..*" Notificacion : genera
 
-' Dependencias
-Reporte ..-- Pedido : basado_en
-Reporte ..-- Entrega : basado_en
-Reporte ..-- ConsumoCombustible : basado_en
+Reporte ..> Pedido : basado_en
+Reporte ..> Entrega : basado_en
+Reporte ..> ConsumoCombustible : basado_en
