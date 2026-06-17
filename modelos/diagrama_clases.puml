@@ -1,0 +1,142 @@
+﻿@startuml
+%%{init: {'flowchart': {'curve': 'linear'}}}%%
+classDiagram
+
+class Persona {
+    +id : int
+    +nombre : string
+    +telefono : string
+    +activo : boolean
+}
+
+class Cliente {
+    +direccion : string
+}
+
+class Conductor {
+    +licencia : string
+    +estado : string
+    +asignar_vehiculo()
+    +cambiar_estado()
+}
+
+class Usuario {
+    +id : int
+    +email : string
+    +contrasena_hash : string
+    +ultimo_acceso : datetime
+    +activo : boolean
+    +iniciar_sesion()
+    +cerrar_sesion()
+}
+
+class Rol {
+    +id : int
+    +nombre : string
+    +descripcion : string
+    +activo : boolean
+}
+
+class Pedido {
+    +id : int
+    +fecha : date
+    +direccion_entrega : string
+    +producto : string
+    +cantidad : int
+    +estado : string
+    +fecha_entrega_estimada : datetime
+    +fecha_entrega_real : datetime
+    +activo : boolean
+    +calcular_estado()
+    +actualizar_estado()
+}
+
+class Vehiculo {
+    +id : int
+    +placa : string
+    +marca : string
+    +capacidad : decimal
+    +estado : string
+    +activo : boolean
+    +calcular_disponibilidad()
+}
+
+class Ruta {
+    +id : int
+    +origen : string
+    +destino : string
+    +distancia_km : decimal
+    +costo_estimado : decimal
+    +costo_real : decimal
+    +tiempo_estimado : int
+    +tiempo_real : int
+    +activo : boolean
+    +calcular_costo()
+    +calcular_tiempo()
+}
+
+class UbicacionGPS {
+    +id : int
+    +latitud : decimal
+    +longitud : decimal
+    +timestamp : datetime
+}
+
+class Entrega {
+    +id : int
+    +fecha : datetime
+    +estado : string
+    +firma : string
+    +registrar_entrega()
+}
+
+class ConsumoCombustible {
+    +id : int
+    +cantidad : decimal
+    +fecha : date
+    +costo : decimal
+}
+
+class Notificacion {
+    +id : int
+    +destinatario : string
+    +mensaje : string
+    +tipo : string
+    +fecha_envio : datetime
+    +enviar()
+}
+
+class Reporte {
+    +id : int
+    +fecha_generacion : datetime
+    +tipo : string
+    +indicadores : string
+    +generar_pdf()
+}
+
+' Herencia
+Persona <|-- Cliente
+Persona <|-- Conductor
+
+' Asociaciones
+Persona "1" -- "1" Usuario : posee
+Usuario "*" -- "*" Rol : tiene
+Cliente "1" -- "0..*" Pedido : realiza
+Conductor "1" -- "0..*" Ruta : asigna
+
+' Agregacion (vehiculo existe independientemente del conductor)
+Conductor "1" o-- "1" Vehiculo : conduce
+
+' Composiciones (clase hija depende del ciclo de vida del padre)
+Pedido "1" *-- "1" Ruta : genera
+Pedido "1" *-- "0..1" Entrega : genera
+Vehiculo "1" *-- "0..*" ConsumoCombustible : registra
+Ruta "1" *-- "0..*" UbicacionGPS : monitorea
+Ruta "1" *-- "0..*" Notificacion : genera
+
+' Dependencias
+Reporte ..-- Pedido : basado_en
+Reporte ..-- Entrega : basado_en
+Reporte ..-- ConsumoCombustible : basado_en
+
+@enduml
